@@ -13,6 +13,7 @@ class Doctor(models.Model):
     # userName = models.CharField(max_length=255)
     longitude = models.FloatField(unique=True)
     latitude = models.FloatField(unique=True)
+    speciality = models.CharField(max_length=255)
     # password = models.CharField(max_length=20)
     def __str__(self):
         return self.name
