@@ -5,7 +5,7 @@ from django.conf import settings
 urlpatterns = [
     path('', views.index,name="index"),
     path('predict_disease', views.predict_disease , name="predict_disease"),
-    path('map_display',views.map_display, name="map_display"),
+    path('map_display/<str:disease>',views.map_display, name="map_display"),
 ]
 
 

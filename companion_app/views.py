@@ -147,7 +147,7 @@ def predict_disease(request):
     return render(request,'output.html',context)
         
 
-def map_display(request):
+def map_display(request,disease):
     g = geocoder.ip('me')
     print(g.latlng)
     lat = 18.9560883
