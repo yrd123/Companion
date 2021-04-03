@@ -6,6 +6,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 import numpy as np
 import pandas as pd
+import folium
+import geocoder
+
 # Create your views here.
 
 def index(request):
@@ -143,4 +146,20 @@ def predict_disease(request):
         context = {'predicted_disease': predicted_disease}
     return render(request,'output.html',context)
         
+
+def map_display(request):
+    g = geocoder.ip('me')
+    print(g.latlng)
+    lat = 18.9560883
+    long_ =  72.8152205
+    pointA = (lat, long_)
+    # initial folium map
+    m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
+    # location marker
+    folium.Marker([lat, long_], tooltip='click here for more', popup="yash here",
+                    icon=folium.Icon(color='black')).add_to(m)
+    folium.Marker([19.2437, 73.1355], tooltip='click here for more', popup="hello ji...doctor batra here..",
+                    icon=folium.Icon(color='black')).add_to(m)
+    m = m._repr_html_()
+    return render(request, 'maps.html', {'map': m})
 
