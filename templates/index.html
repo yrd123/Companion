@@ -28,5 +28,82 @@
 
   <video id="video" width="720px" height="560px" autoplay muted></video>
 
+  <H1> Input the Symptoms</H1>
+
+
+  <form action="/predictDisease" method="POST" style="margin:100px 200px;">
+
+
+    <div class="form-group">
+      <b><label for="exampleFormControlSelect1">Select Symptom 1 </label></b>
+      <select class="form-control" name="symp1">
+          <option value="" selected>Select the symptom </option>
+          {% for symptom in  symptoms %}
+          <option value="{{ symptom }}">{{ symptom }}</option>
+          {% endfor %}
+      </select><br>
+  </div>  
+
+  
+  <div class="form-group">
+    <b><label for="exampleFormControlSelect1">Select Symptom 1 </label></b>
+    <select class="form-control" name="symp1">
+        <option value="" selected>Select the symptom </option>
+        {% for symptom in  symptoms %}
+        <option value="{{ symptom }}">{{ symptom }}</option>
+        {% endfor %}
+    </select><br>
+</div>  
+
+
+<div class="form-group">
+  <b><label for="exampleFormControlSelect1">Select Symptom 2 </label></b>
+  <select class="form-control" name="symp2">
+      <option value="" selected>Select the symptom </option>
+      {% for symptom in  symptoms %}
+      <option value="{{ symptom }}">{{ symptom }}</option>
+      {% endfor %}
+  </select><br>
+</div>  
+
+
+<div class="form-group">
+  <b><label for="exampleFormControlSelect1">Select Symptom 3 </label></b>
+  <select class="form-control" name="symp3">
+      <option value="" selected>Select the symptom </option>
+      {% for symptom in  symptoms %}
+      <option value="{{ symptom }}">{{ symptom }}</option>
+      {% endfor %}
+  </select><br>
+</div>  
+
+
+<div class="form-group">
+  <b><label for="exampleFormControlSelect1">Select Symptom 4 </label></b>
+  <select class="form-control" name="symp4">
+      <option value="" selected>Select the symptom </option>
+      {% for symptom in  symptoms %}
+      <option value="{{ symptom }}">{{ symptom }}</option>
+      {% endfor %}
+  </select><br>
+</div>  
+
+
+<div class="form-group">
+  <b><label for="exampleFormControlSelect1">Select Symptom 5 </label></b>
+  <select class="form-control" name="symp5">
+      <option value="" selected>Select the symptom </option>
+      {% for symptom in  symptoms %}
+      <option value="{{ symptom }}">{{ symptom }}</option>
+      {% endfor %}
+  </select><br>
+</div>  
+  
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+
+</form>
+
 </body>
 </html>
