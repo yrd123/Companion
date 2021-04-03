@@ -178,7 +178,7 @@ def map_display(request,disease):
             long_ =  g.latlng[1]
             pointA = (lat, long_)
             m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
-
+            folium.Marker([lat, long_], tooltip="ME", popup="Your address",icon=folium.Icon(color='red')).add_to(m)
             for doctor in doctor_obj:
                 # g = geocoder.ip('me')
                 # print(g.latlng)
@@ -189,7 +189,10 @@ def map_display(request,disease):
                 # initial folium map
                 # m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
                 # location marker
-                folium.Marker([lat, long_], tooltip=doctor.name, popup=doctor.address,icon=folium.Icon(color='black')).add_to(m)
-                m = m._repr_html_()
+                popup = folium.Popup("<h6>"+doctor.name+"</h6><b>Address:  </b>"+doctor.address,
+                     min_width=300,
+                     max_width=300)
+                folium.Marker([lat, long_], tooltip=doctor.name, popup=popup,icon=folium.Icon(color='black')).add_to(m)
+            m = m._repr_html_()
     return render(request, 'maps.html', {'map': m})
 
