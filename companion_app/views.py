@@ -34,6 +34,7 @@ def index(request):
     'palpitations','painful_walking','pus_filled_pimples','blackheads','scurring','skin_peeling',
     'silver_like_dusting','small_dents_in_nails','inflammatory_nails','blister','red_sore_around_nose',
     'yellow_crust_ooze']
+    # l1.sort()
     context={'symptoms':l1}
 
     # import pandas as pd
@@ -60,6 +61,7 @@ def predict_disease(request):
         symptom3 = request.POST["symptom3"]
         symptom4 = request.POST["symptom4"]
         symptom5 = request.POST["symptom5"]
+        print(symptom1+symptom2+symptom3+symptom4+symptom5)
 
         l1=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yellow_urine',
         'yellowing_of_eyes','acute_liver_failure','fluid_overload','swelling_of_stomach',
@@ -91,10 +93,11 @@ def predict_disease(request):
         'Heartattack','Varicoseveins','Hypothyroidism','Hyperthyroidism','Hypoglycemia','Osteoarthristis',
         'Arthritis','(vertigo) Paroymsal  Positional Vertigo','Acne','Urinary tract infection','Psoriasis',
         'Impetigo']
+
         l2=[0]*len(l1)
-
+        print(l2)
         df=pd.read_csv("./files/Training.csv")
-
+        print(df)
         df.replace({'prognosis':{'Fungal infection':0,'Allergy':1,'GERD':2,'Chronic cholestasis':3,'Drug Reaction':4,
         'Peptic ulcer diseae':5,'AIDS':6,'Diabetes ':7,'Gastroenteritis':8,'Bronchial Asthma':9,'Hypertension ':10,
         'Migraine':11,'Cervical spondylosis':12,
@@ -137,6 +140,8 @@ def predict_disease(request):
             # -----------------------------------------------------
 
             psymptoms = [symptom1,symptom2,symptom3,symptom4,symptom5]
+            print("i am in")
+            print(psymptoms)
             for k in range(0,len(l1)):
                 for z in psymptoms:
                     if(z==l1[k]):
@@ -145,7 +150,8 @@ def predict_disease(request):
             inputtest = [l2]
             predict = gnb.predict(inputtest)
             predicted=predict[0]
-
+            print("Predicted")
+            print(predicted)
             h='no'
             for a in range(0,len(disease)):
                 if(predicted == a):
