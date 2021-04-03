@@ -4,10 +4,12 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
+from .models import Doctor, Disease
 import numpy as np
 import pandas as pd
 import folium
 import geocoder
+# import ./files
 
 # Create your views here.
 
@@ -33,6 +35,21 @@ def index(request):
     'silver_like_dusting','small_dents_in_nails','inflammatory_nails','blister','red_sore_around_nose',
     'yellow_crust_ooze']
     context={'symptoms':l1}
+
+    # import pandas as pd
+    # df = pd.read_excel("./files/doctor.xlsx")
+    # print(df.head())
+    # for i in range(len(df)):
+    #     print(df.iloc[i, 1])
+    #     Doctor.objects.create(name=df.iloc[i, 0],
+    #                             address=df.iloc[i, 1],
+    #                             latitude=df.iloc[i, 2],
+    #                             longitude=df.iloc[i, 3],
+    #                             speciality=df.iloc[i, 4]
+    #                             )
+
+        # 0 name address latitude logitutde speciality
+
     return render(request,'index.html',context)
 
 def predict_disease(request):
@@ -148,18 +165,31 @@ def predict_disease(request):
         
 
 def map_display(request,disease):
-    g = geocoder.ip('me')
-    print(g.latlng)
-    lat = 18.9560883
-    long_ =  72.8152205
-    pointA = (lat, long_)
-    # initial folium map
-    m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
-    # location marker
-    folium.Marker([lat, long_], tooltip='click here for more', popup="yash here",
-                    icon=folium.Icon(color='black')).add_to(m)
-    folium.Marker([19.2437, 73.1355], tooltip='click here for more', popup="hello ji...doctor batra here..",
-                    icon=folium.Icon(color='black')).add_to(m)
-    m = m._repr_html_()
+    speciality_obj=Disease.objects.filter(disease_name=disease)
+    print(speciality_obj)
+    if(speciality_obj.exists()):
+        
+        speciality_obj=speciality_obj.get(disease_name=disease)
+        print(speciality_obj)
+        doctor_obj=Doctor.objects.filter(speciality=speciality_obj.speciality)
+        if(doctor_obj.exists()):
+            g = geocoder.ip('me')
+            lat = g.latlng[0]
+            long_ =  g.latlng[1]
+            pointA = (lat, long_)
+            m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
+
+            for doctor in doctor_obj:
+                # g = geocoder.ip('me')
+                # print(g.latlng)
+                lat = doctor.latitude
+                long_ =  doctor.longitude
+                pointA = (lat, long_)
+                print(doctor.name)
+                # initial folium map
+                # m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
+                # location marker
+                folium.Marker([lat, long_], tooltip=doctor.name, popup=doctor.address,icon=folium.Icon(color='black')).add_to(m)
+                m = m._repr_html_()
     return render(request, 'maps.html', {'map': m})
 
