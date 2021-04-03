@@ -34,9 +34,7 @@ disease=['Fungal infection','Allergy','GERD','Chronic cholestasis','Drug Reactio
 'Arthritis','(vertigo) Paroymsal  Positional Vertigo','Acne','Urinary tract infection','Psoriasis',
 'Impetigo']
 
-l2=[]
-for x in range(0,len(l1)):
-    l2.append(0)
+l2=[0]*len(l1)
 
 # TESTING DATA df -------------------------------------------------------------------------------------
 df=pd.read_csv("Training.csv")

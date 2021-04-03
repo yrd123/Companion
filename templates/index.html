@@ -5,49 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <title>Document</title>
-  <script defer src="{% static 'face-api.min.js' %}"></script>
-  <script defer src="{% static 'script.js' %}"></script>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    
 
-    canvas {
-      position: absolute;
-    }
+  
   </style>
 </head>
 <body>
 
-  <video id="video" width="720px" height="560px" autoplay muted></video>
-
-  <H1> Input the Symptoms</H1>
+  <H2> Input the Symptoms</H2>
 
 
-  <form action="/predictDisease" method="POST" style="margin:100px 200px;">
-
-
-    <div class="form-group">
-      <b><label for="exampleFormControlSelect1">Select Symptom 1 </label></b>
-      <select class="form-control" name="symp1">
-          <option value="" selected>Select the symptom </option>
-          {% for symptom in  symptoms %}
-          <option value="{{ symptom }}">{{ symptom }}</option>
-          {% endfor %}
-      </select><br>
-  </div>  
-
+  <form action="/predict_disease" method="POST" style="margin:100px 200px;">
+    {% csrf_token %}
   
   <div class="form-group">
     <b><label for="exampleFormControlSelect1">Select Symptom 1 </label></b>
-    <select class="form-control" name="symp1">
+    <select class="form-control" name="symptom1">
         <option value="" selected>Select the symptom </option>
         {% for symptom in  symptoms %}
         <option value="{{ symptom }}">{{ symptom }}</option>
@@ -58,9 +37,9 @@
 
 <div class="form-group">
   <b><label for="exampleFormControlSelect1">Select Symptom 2 </label></b>
-  <select class="form-control" name="symp2">
+  <select class="form-control" name="symptom2">
       <option value="" selected>Select the symptom </option>
-      {% for symptom in  symptoms %}
+      {% for symptom in symptoms %}
       <option value="{{ symptom }}">{{ symptom }}</option>
       {% endfor %}
   </select><br>
@@ -69,7 +48,7 @@
 
 <div class="form-group">
   <b><label for="exampleFormControlSelect1">Select Symptom 3 </label></b>
-  <select class="form-control" name="symp3">
+  <select class="form-control" name="symptom3">
       <option value="" selected>Select the symptom </option>
       {% for symptom in  symptoms %}
       <option value="{{ symptom }}">{{ symptom }}</option>
@@ -80,7 +59,7 @@
 
 <div class="form-group">
   <b><label for="exampleFormControlSelect1">Select Symptom 4 </label></b>
-  <select class="form-control" name="symp4">
+  <select class="form-control" name="symptom4">
       <option value="" selected>Select the symptom </option>
       {% for symptom in  symptoms %}
       <option value="{{ symptom }}">{{ symptom }}</option>
@@ -91,7 +70,7 @@
 
 <div class="form-group">
   <b><label for="exampleFormControlSelect1">Select Symptom 5 </label></b>
-  <select class="form-control" name="symp5">
+  <select class="form-control" name="symptom5">
       <option value="" selected>Select the symptom </option>
       {% for symptom in  symptoms %}
       <option value="{{ symptom }}">{{ symptom }}</option>
