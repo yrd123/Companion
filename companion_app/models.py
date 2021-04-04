@@ -25,3 +25,6 @@ class Disease(models.Model):
   description=models.TextField(max_length=9000, default="No infromation")
   def __str__(self):
     return self.disease_name
+
+
+    

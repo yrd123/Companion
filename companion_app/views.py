@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import folium
 import geocoder
+import geopy
 # import ./files
 
 # Create your views here.
@@ -173,4 +174,30 @@ def map_display(request,disease):
                 folium.Marker([lat, long_], tooltip=doctor.name, popup=popup,icon=folium.Icon(color='black')).add_to(m)
             m = m._repr_html_()
     return render(request, 'maps.html', {'map': m})
+
+@login_required(login_url="admin:login")
+def doctor_add(request):
+
+    if request.method == "POST":
+
+        name = request.POST["name"]
+
+        address = request.POST["address"]
+
+        speciality = request.POST["speciality"]
+
+        locator = geopy.Nominatim(user_agent='myGeocoder')
+
+        location = locator.geocode(address)
+
+        lat = location.latitude
+
+        long_ =  location.longitude
+
+        doc_obj = Doctor.objects.create(name = name, address = address, speciality = speciality, latitude=lat, longitude=long_)
+
+        doc_obj.save()
+
+        return redirect("index")
+    return render(request,template_name="doctor_add.html")
 
