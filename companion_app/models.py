@@ -22,5 +22,6 @@ class Doctor(models.Model):
 class Disease(models.Model):
   disease_name = models.CharField(max_length=255)
   speciality=models.CharField(max_length=255)
+  description=models.TextField(max_length=9000, default="No infromation")
   def __str__(self):
     return self.disease_name
