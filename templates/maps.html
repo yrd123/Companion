@@ -5,8 +5,85 @@
 
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <script src="./index.js"></script>
+    <style>
+                .title {
+        color: whitesmoke;
+
+        font-family: "Mistral";
+        text-align: center;
+        font-size: 150px;
+      }
+
+      body {
+        /* background-image: url("../media/bg.jpg"); */
+        /* background-repeat: no-repeat; */
+        /* background-position: right top; */
+        /* background-attachment: fixed; */
+        /* background-size: cover; */
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        
+        background-size: 1600px 800px;
+        background-repeat: no-repeat;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: rgb(250, 249, 252);
+      }
+
+      li {
+        float: left;
+      }
+
+      #left {
+        float: right;
+      }
+
+      li a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 28px;
+        color: black;
+        font-family: "Segoe UI";
+      }
+
+      li a:hover {
+        background-color: black;
+        color: white;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
+    <ul>
+      <li>
+        <img src="../media/log.png" alt="" height="60px" width="60px" />
+      </li>
+      <li>
+        <a  href="{% url 'index' %}">Home</a>
+      </li>
+      <li>
+        <!-- <a href="#news">About Us</a> -->
+      </li>
+      <li>
+        <a class="active" href="{% url 'predict_disease' %}">Predict the disease</a>
+      </li>
+      <li>
+        <!-- <a href="Login.html">Login/SignUp</a> -->
+      </li>
+    </ul>
     {{ map|safe }}
   </body>
 </html>
