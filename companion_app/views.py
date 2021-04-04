@@ -145,6 +145,12 @@ def predict_disease(request):
 
 def map_display(request,disease):
     speciality_obj=Disease.objects.filter(disease_name=disease)
+    g = geocoder.ip('me')
+    lat = g.latlng[0]
+    long_ =  g.latlng[1]
+    pointA = (lat, long_)
+    m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
+    folium.Marker([lat, long_], tooltip="ME", popup="Your address",icon=folium.Icon(color='red')).add_to(m)
     print(speciality_obj)
     if(speciality_obj.exists()):
         
@@ -152,12 +158,7 @@ def map_display(request,disease):
         print(speciality_obj)
         doctor_obj=Doctor.objects.filter(speciality=speciality_obj.speciality)
         if(doctor_obj.exists()):
-            g = geocoder.ip('me')
-            lat = g.latlng[0]
-            long_ =  g.latlng[1]
-            pointA = (lat, long_)
-            m = folium.Map(width=800, height=500, location = pointA, zoom_start=8)
-            folium.Marker([lat, long_], tooltip="ME", popup="Your address",icon=folium.Icon(color='red')).add_to(m)
+            
             for doctor in doctor_obj:
                 # g = geocoder.ip('me')
                 # print(g.latlng)
@@ -172,7 +173,7 @@ def map_display(request,disease):
                      min_width=300,
                      max_width=300)
                 folium.Marker([lat, long_], tooltip=doctor.name, popup=popup,icon=folium.Icon(color='black')).add_to(m)
-            m = m._repr_html_()
+    m = m._repr_html_()
     return render(request, 'maps.html', {'map': m})
 
 @login_required(login_url="admin:login")

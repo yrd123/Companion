@@ -20,7 +20,7 @@
       }
 
       body {
-        background-image: url("../media/bg.jpg");
+        background-image: url("../media/414.jpg");
         background-repeat: no-repeat;
         background-position: right top;
         background-attachment: fixed;
@@ -73,7 +73,7 @@
 </head>
 <body>
 
-  <ul>
+  <ul style="zoom:80%;">
     <li>
       <img src="../media/log.png" alt="" height="60px" width="60px" />
     </li>
@@ -91,10 +91,10 @@
     </li>
   </ul>
 
-  <H2> Input the Symptoms</H2>
+<center><div><H2 style="color:black;"> Input the Symptoms</H2></div></center>
 
 
-  <form action="/predict_disease" method="POST" style="margin:100px 200px;">
+  <form action="/predict_disease" method="POST" style="margin:20px 200px;">
     {% csrf_token %}
   
   <div class="form-group">
